@@ -19,7 +19,7 @@ describe("check whether attack is a hit or a miss", () => {
   let board = game.getBoard();
 
   it("Using receiveAttack to hit a ship", () => {
-    game.placeShip("Patrol Boat", 2, [0, 0], [0, 2]);
+    game.placeShip("Patrol Boat", 2, [0, 0], [0, 1]);
     game.receiveAttack([0, 1]);
     expect(board[0][1].timesHit).toBe(1);
   });
@@ -30,7 +30,9 @@ describe("check whether attack is a hit or a miss", () => {
   });
 
   it("Ship is sunk", () => {
-    game.receiveAttack([0, 0]);
-    expect(game.receiveAttack([0, 2])).toBe("Ship is sunk");
+    game.placeShip("Submarine", 3, [7, 4], [7, 6]);
+    game.receiveAttack([7, 4]);
+    game.receiveAttack([7, 5]);
+    expect(game.receiveAttack([7, 6])).toBe("Ship is sunk");
   });
 });

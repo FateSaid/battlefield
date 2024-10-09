@@ -22,7 +22,5 @@ test("Contains function that calculate whether a ship is considered sunk", () =>
   let obj = new Ship("Patrol Boat", 2);
   obj.hit();
   obj.hit();
-  expect(obj.isSunk()).toBeFalsy();
-  obj.hit();
   expect(obj.isSunk()).toBeTruthy();
 });
