@@ -5,6 +5,8 @@ function Gameboard() {
 
   let getBoard = () => board;
 
+  let missedAttacks = [];
+
   function createBoard() {
     let array = [];
     for (let i = 0; i < 10; i++) {
@@ -24,14 +26,14 @@ function Gameboard() {
     let ship = new Ship(shipName, length);
 
     if (y1 > y2) {
-      for (let i = y1; i > y2; i--) {
+      for (let i = y1; i >= y2; i--) {
         if (board[x1][i] === ship) {
           throw new Error("It already contains ship object");
         }
         board[x1][i] = ship;
       }
     } else {
-      for (let i = y2; i > y1; i--) {
+      for (let i = y2; i >= y1; i--) {
         if (board[x1][i] === ship) {
           throw new Error("It already contains ship object");
         }
@@ -39,9 +41,25 @@ function Gameboard() {
       }
     }
   }
+
+  function receiveAttack(coordinate) {
+    let [x, y] = coordinate;
+    let board = getBoard();
+    if (board[x][y].name !== undefined) {
+      board[x][y].hit();
+      if (board[x][y].isSunk()) {
+        return `Ship is sunk`;
+      }
+    } else {
+      missedAttacks.push([x, y]);
+      board[x][y] = null;
+    }
+  }
   return {
     getBoard,
     placeShip,
+    receiveAttack,
+    missedAttacks,
   };
 }
 
