@@ -30,25 +30,6 @@ body {
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-.start {
-  font-size: 4rem;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #000;
-  align-self: center;
-  position: relative;
-  top: 400px;
-  padding: 10px 20px;
-  border-radius: 5%;
-  color: white;
-  background-color: black;
-}
-
-.start:hover {
-  color: black;
-  background-color: white;
-}
-
 header,
 footer {
   display: flex;

@@ -1,17 +1,31 @@
 import { Gameboard } from "./gameboard.js";
 
-test("place a ship", () => {
+describe("Placing a Ship", () => {
   let game = Gameboard();
-  game.placeShip("Patrol Boat", 2, [0, 0], [0, 2]);
-
   let board = game.getBoard();
-  expect(board[0][0].name).toMatch("Patrol Boat");
-  expect(board[0][1].name).toMatch("Patrol Boat");
-  expect(board[0][2].name).toMatch("Patrol Boat");
+  test("place a ship vertical", () => {
+    game.placeShip("Patrol Boat", 2, [0, 0], [0, 2]);
 
-  game.placeShip("Battleship", 4, [6, 6], [6, 10]);
-  expect(board[6][7].name).toMatch("Battleship");
-  expect(board[6][9].name).toMatch("Battleship");
+    expect(board[0][0].name).toMatch("Patrol Boat");
+    expect(board[0][1].name).toMatch("Patrol Boat");
+    expect(board[0][2].name).toMatch("Patrol Boat");
+
+    game.placeShip("Battleship", 4, [6, 6], [6, 10]);
+    expect(board[6][7].name).toMatch("Battleship");
+    expect(board[6][9].name).toMatch("Battleship");
+  });
+
+  test("Place a ship horizontal", () => {
+    game.placeShip("Submarine", 3, [0, 0], [2, 0]);
+    expect(board[1][0].name).toMatch("Submarine");
+    expect(board[2][0].name).toMatch("Submarine");
+    expect(board[0][0].name).toMatch("Submarine");
+
+    game.placeShip("Destroyer", 3, [3, 9], [5, 9]);
+    expect(board[3][9].name).toMatch("Destroyer");
+    expect(board[4][9].name).toMatch("Destroyer");
+    expect(board[5][9].name).toMatch("Destroyer");
+  });
 });
 
 describe("check whether attack is a hit or a miss", () => {
