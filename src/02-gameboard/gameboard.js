@@ -1,4 +1,4 @@
-import { Ship } from "../01-class-ship/ship";
+import { Ship } from "../01-class-ship/ship.js";
 
 function Gameboard() {
   let board = createBoard();
@@ -24,21 +24,24 @@ function Gameboard() {
     let [x2, y2] = y;
 
     let ship = new Ship(shipName, length);
-
-    if (y1 > y2) {
-      for (let i = y1; i >= y2; i--) {
-        if (board[x1][i] === ship) {
-          throw new Error("It already contains ship object");
+    if (x1 === x2) {
+      if (y1 > y2) {
+        for (let i = y1; i >= y2; i--) {
+          if (board[x1][i] === ship) {
+            throw new Error("It already contains ship object");
+          }
+          board[x1][i] = ship;
         }
-        board[x1][i] = ship;
-      }
-    } else {
-      for (let i = y2; i >= y1; i--) {
-        if (board[x1][i] === ship) {
-          throw new Error("It already contains ship object");
+      } else {
+        for (let i = y2; i >= y1; i--) {
+          if (board[x1][i] === ship) {
+            throw new Error("It already contains ship object");
+          }
+          board[x1][i] = ship;
         }
-        board[x1][i] = ship;
       }
+    }
+    if (y1 === y2) {
     }
   }
 

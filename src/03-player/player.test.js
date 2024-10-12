@@ -1,4 +1,4 @@
-import { Player } from "./player";
+import { Player } from "./player.js";
 
 describe("Create two types of players", () => {
   let player1 = new Player("User");
