@@ -10,9 +10,12 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
 }
 
 .content {
@@ -28,6 +31,18 @@ body {
   font-size: 10rem;
   font-family: "stancil", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.board {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.player-board {
+  border: 1px solid #000;
+  width: 800px;
+  height: 800px;
 }
 
 header,
