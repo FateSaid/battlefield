@@ -41,8 +41,23 @@ body {
 
 .player-board {
   border: 1px solid #000;
-  width: 800px;
-  height: 800px;
+  width: 600px;
+  height: 600px;
+}
+
+#oneBoard,
+#twoBoard {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-rows: repeat(10, minmax(0, 1fr));
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 header,

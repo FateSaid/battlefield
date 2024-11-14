@@ -23,5 +23,5 @@ export function setupGame() {
 }
 
 let play = setupGame();
-
-console.log(play.player1.game.getBoard());
+console.log("PLAYER1", play.player1.game.getBoard());
+console.log("PLAYER2", play.player2.game.getBoard());
