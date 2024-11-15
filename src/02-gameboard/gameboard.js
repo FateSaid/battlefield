@@ -27,10 +27,4 @@ function Gameboard() {
   };
 }
 
-//Create Board
-
-//Add Ship
-
-//Receive Attack
-
 export { Gameboard };
