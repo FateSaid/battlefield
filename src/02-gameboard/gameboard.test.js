@@ -26,6 +26,12 @@ describe("Placing a Ship", () => {
     expect(board[4][9].name).toMatch("Destroyer");
     expect(board[5][9].name).toMatch("Destroyer");
   });
+
+  test("Abort if the coordinates are wrong", () => {
+    expect(() => {
+      game.placeShip("Carrier", 5, [9, 3], [2, 2]);
+    }).toThrow("Horizontal or vertical coordinates only");
+  });
 });
 
 describe("check whether attack is a hit or a miss", () => {

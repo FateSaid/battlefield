@@ -2,6 +2,10 @@ export function addShip(board, ship, x, y) {
   let [x1, y1] = x;
   let [x2, y2] = y;
 
+  if (x1 !== x2 && y1 !== y2) {
+    throw new Error("Horizontal or vertical coordinates only");
+  }
+
   function loopCoordinate(same, diff, pos) {
     let [diff1, diff2] = diff;
     for (let i = diff1; i >= diff2; i--) {

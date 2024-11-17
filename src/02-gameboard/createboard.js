@@ -7,5 +7,4 @@ export function createBoard() {
     }
   }
   return array;
-  ``;
 }
