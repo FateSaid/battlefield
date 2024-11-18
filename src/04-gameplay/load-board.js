@@ -10,16 +10,30 @@ function playerBoard(player, domBoard) {
 
   board.forEach((item) => {
     item.forEach((element) => {
-      let cell = createDiv(player, element);
-      domBoard.appendChild(cell);
+      const cell = createDiv(element, domBoard);
+      eventHandler(cell);
     });
   });
 }
 
-function createDiv(object) {
-  if (typeof object !== "object") return;
+function createDiv(object, domBoard) {
   const cell = document.createElement("div");
   cell.classList.add("cell");
-  cell.setAttribute("data-object", JSON.stringify(object));
+  if (!Array.isArray(object)) {
+    cell.setAttribute("data-object", JSON.stringify(object));
+  }
+  domBoard.appendChild(cell);
   return cell;
+}
+
+function eventHandler(cell) {
+  cell.addEventListener("click", () => {
+    let shipObj = JSON.parse(cell.getAttribute("data-object"));
+    if (shipObj !== null) {
+      cell.textContent = shipObj.name;
+      shipObj.hit();
+    } else {
+      cell.textContent = "X";
+    }
+  });
 }
