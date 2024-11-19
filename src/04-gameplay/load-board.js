@@ -1,6 +1,7 @@
 export function loadBoard(player1, player2) {
   const player1Board = document.getElementById("oneBoard");
   const player2Board = document.getElementById("twoBoard");
+  const resultBoard = document.querySelector(".result");
   playerBoard(player1, player1Board);
   playerBoard(player2, player2Board);
 }
@@ -31,7 +32,7 @@ function eventHandler(cell) {
     let shipObj = JSON.parse(cell.getAttribute("data-object"));
     if (shipObj !== null) {
       cell.textContent = shipObj.name;
-      shipObj.hit();
+      cell.classList.add(`${shipObj.name}`);
     } else {
       cell.textContent = "X";
     }
