@@ -1,4 +1,4 @@
-export function setupShip(player1, player2) {
+export function SetupShip(player1, player2) {
   player1.game.placeShip("Carrier", 5, [0, 0], [0, 4]);
   player1.game.placeShip("Battleship", 4, [5, 5], [5, 8]);
   player1.game.placeShip("Destroyer", 3, [4, 3], [4, 5]);

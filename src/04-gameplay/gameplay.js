@@ -20,9 +20,13 @@ export function SetupGame() {
   return {
     player1,
     player2,
+    switchPlayer,
+    activePlayer,
   };
 }
 
 function startGame() {
-  let;
+  let gamePlay = SetupGame();
+
+  gamePlay();
 }

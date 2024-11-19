@@ -9,32 +9,25 @@ export function loadBoard(player1, player2) {
 function playerBoard(player, domBoard) {
   let board = player.game.getBoard();
 
-  board.forEach((item) => {
-    item.forEach((element) => {
-      const cell = createDiv(element, domBoard);
-      eventHandler(cell);
-    });
-  });
+  createCell(domBoard, board);
 }
 
-function createDiv(object, domBoard) {
-  const cell = document.createElement("div");
-  cell.classList.add("cell");
-  if (!Array.isArray(object)) {
-    cell.setAttribute("data-object", JSON.stringify(object));
-  }
-  domBoard.appendChild(cell);
-  return cell;
-}
-
-function eventHandler(cell) {
-  cell.addEventListener("click", () => {
-    let shipObj = JSON.parse(cell.getAttribute("data-object"));
-    if (shipObj !== null) {
-      cell.textContent = shipObj.name;
-      cell.classList.add(`${shipObj.name}`);
-    } else {
-      cell.textContent = "X";
+function createCell(domBoard, board) {
+  for (let i = 0; i < board.length; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    for (let j = 0; j < board[i].length; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      eventHandler(cell, i, j);
+      row.appendChild(cell);
     }
+    domBoard.appendChild(row);
+  }
+}
+
+function eventHandler(cell, i, j) {
+  cell.addEventListener("click", () => {
+    console.log(i, j);
   });
 }
