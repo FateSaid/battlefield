@@ -61,6 +61,10 @@ body {
   flex: 1;
 }
 
+.ship {
+  background-color: darkblue;
+}
+
 .result {
   border: 1px solid #000;
   display: flex;

@@ -53,6 +53,24 @@ describe("check whether attack is a hit or a miss", () => {
     game.placeShip("Submarine", 3, [7, 4], [7, 6]);
     game.receiveAttack([7, 4]);
     game.receiveAttack([7, 5]);
-    expect(game.receiveAttack([7, 6])).toBe("Ship is sunk");
+    expect(game.receiveAttack([7, 6])).toBeTruthy();
+
+    expect(game.receiveAttack([4, 5])).toBeFalsy();
   });
+});
+
+describe("Calculate total ships sunk", () => {
+  let game = Gameboard();
+
+  game.placeShip("Submarine", 3, [7, 4], [7, 6]);
+  game.receiveAttack([7, 4]);
+  game.receiveAttack([7, 5]);
+  game.receiveAttack([7, 6]);
+
+  expect(game.totalShipSunk()).toBe(1);
+
+  game.placeShip("Patrol Boat", 2, [0, 0], [0, 1]);
+  game.receiveAttack([0, 0]);
+  game.receiveAttack([0, 1]);
+  expect(game.totalShipSunk()).toBe(2);
 });
