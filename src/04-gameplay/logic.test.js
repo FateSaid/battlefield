@@ -25,6 +25,6 @@ describe("Checking GameController players", () => {
       [0, 0],
       [9, 9],
     ];
-    expect(gameplay.getActivePlayer().game.missedAttacks).toContain(shouldHave);
+    expect(gameplay.getActivePlayer().game.missedAttacks).toEqual(shouldHave);
   });
 });
