@@ -19,11 +19,25 @@ export function GameController(player1, player2) {
     let opponent = activePlayer === players[1] ? players[0] : players[1];
     opponent.game.receiveAttack([x, y]);
 
+    //calculate Winner
+    if (calculateWinner(opponent)) {
+      return `${getActivePlayer().name} is Winner`;
+    }
+
     switchPlayer();
+  }
+
+  function calculateWinner(player) {
+    return player.game.totalShipSunk() === 5;
+  }
+
+  function renderBoard() {
+    return getActivePlayer().game.getBoard();
   }
 
   return {
     getActivePlayer,
     playRound,
+    renderBoard,
   };
 }

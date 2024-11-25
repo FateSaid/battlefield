@@ -63,6 +63,7 @@ describe("Calculate Winners", () => {
     gameplay.playRound([4, 3]);
     gameplay.playRound([4, 3]);
     gameplay.playRound([4, 4]);
+    gameplay.playRound([4, 4]);
     gameplay.playRound([4, 5]);
     gameplay.playRound([4, 5]);
     gameplay.playRound([8, 7]);
@@ -73,7 +74,11 @@ describe("Calculate Winners", () => {
     gameplay.playRound([8, 9]);
     gameplay.playRound([2, 4]);
     gameplay.playRound([2, 4]);
+
+    console.log(gameplay.getActivePlayer().game.totalShipSunk());
     gameplay.playRound([2, 5]);
+
+    console.log(gameplay.getActivePlayer().game.totalShipSunk());
     expect(gameplay.playRound([2, 5])).toBe("Computer is Winner");
   });
 });
