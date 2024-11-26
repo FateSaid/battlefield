@@ -31,13 +31,8 @@ export function GameController(player1, player2) {
     return player.game.totalShipSunk() === 5;
   }
 
-  function renderBoard() {
-    return getActivePlayer().game.getBoard();
-  }
-
   return {
     getActivePlayer,
     playRound,
-    renderBoard,
   };
 }
