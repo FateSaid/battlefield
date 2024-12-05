@@ -84,35 +84,3 @@ footer {
   border: 1px solid #000;
   justify-content: center;
 }
-
-/* Dialog */
-
-dialog {
-  height: 50%;
-  width: 50%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow:
-    rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-.dialog-title {
-  font-size: 4rem;
-  letter-spacing: 5px;
-}
-
-.mode {
-  height: 200px;
-  width: 400px;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  letter-spacing: 4px;
-  font-family: "start", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}

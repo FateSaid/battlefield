@@ -1,4 +1,4 @@
-import { GameController } from "./logic.js";
+import { GameController } from "./GameController.js";
 import { createPlayer } from "./create-player.js";
 
 describe("Checking GameController players", () => {
@@ -78,5 +78,98 @@ describe("Calculate Winners", () => {
     gameplay.playRound([2, 5]);
 
     expect(gameplay.playRound([2, 5])).toBe("Computer is Winner");
+  });
+});
+
+describe("Print Board", () => {
+  let gameplay = GameController("User", "Computer");
+
+  let playerOneShipLocation = [
+    [0, 0],
+    [0, 4],
+    [(5, 5)],
+    [5, 8],
+    [(4, 3)],
+    [4, 5],
+    [(8, 7)],
+    [8, 9],
+    [(2, 4)],
+    [2, 5],
+  ];
+
+  let playerTwoShipLocation = [
+    [5, 0],
+    [9, 0],
+    [(0, 4)],
+    [0, 7],
+    [(3, 7)],
+    [3, 9],
+    [(5, 7)],
+    [7, 7],
+    [(0, 9)],
+    [1, 9],
+  ];
+  function checkBoard(board, playerLocation) {
+    for (let i = 0; i < playerLocation.length; i++) {
+      let [x, y] = playerLocation[i];
+      if (Array.isArray(board[x][y])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  it(`Should print active player's board`, () => {
+    expect(
+      checkBoard(
+        gameplay.getActivePlayer().game.getBoard(),
+        playerOneShipLocation
+      )
+    ).toBeTruthy();
+  });
+
+  it("Should print opponent board", () => {
+    let oppBoard = [
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+    ];
+
+    let players = gameplay.getPlayerBoards();
+    expect(players[1]).toStrictEqual(oppBoard);
+  });
+
+  it("Should have missed coordinates on opponent board", () => {
+    let oppBoard = [
+      [[], [], [], [], [], [], [], [], [], ["x"]],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+    ];
+
+    gameplay.playRound([9, 9]);
+    gameplay.playRound([9, 9]);
+
+    let players = gameplay.getPlayerBoards();
+
+    let [playerBoard, opponentBoard] = players;
+
+    console.log(opponentBoard);
+    console.log(oppBoard);
+
+    expect(opponentBoard).toStrictEqual(oppBoard);
   });
 });
