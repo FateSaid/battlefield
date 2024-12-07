@@ -1,2 +1,4 @@
 import "./style.css";
-import { GameController } from "./04-gameplay/logic.js";
+import { ScreenController } from "./05-ScreenController/ScreenController.js";
+
+ScreenController();

@@ -1,11 +1,18 @@
 function playerOneBoard(div) {
   const playerOne = document.getElementById("first-player-board");
-  playerOne.textContent = div;
+  playerOne.appendChild(div);
 }
 
 function playerTwoBoard(div) {
   const playerTwo = document.getElementById("second-player-board");
-  playerTwo.textContent = div;
+  playerTwo.appendChild(div);
+}
+
+function clearPlayerBoards() {
+  const playerOne = document.getElementById("first-player-board");
+  const playerTwo = document.getElementById("second-player-board");
+  playerOne.textContent = "";
+  playerTwo.textContent = "";
 }
 
 function resultOutput(div) {
@@ -13,4 +20,4 @@ function resultOutput(div) {
   result.textContent = div;
 }
 
-export { playerOneBoard, playerTwoBoard, resultOutput };
+export { playerOneBoard, playerTwoBoard, resultOutput, clearPlayerBoards };

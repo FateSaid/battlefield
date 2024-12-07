@@ -1,5 +1,4 @@
 import { GameController } from "./GameController.js";
-import { createPlayer } from "./create-player.js";
 
 describe("Checking GameController players", () => {
   let gameplay = GameController("User", "Computer");
@@ -142,8 +141,8 @@ describe("Print Board", () => {
       [[], [], [], [], [], [], [], [], [], []],
     ];
 
-    let players = gameplay.getPlayerBoards();
-    expect(players[1]).toStrictEqual(oppBoard);
+    let opp = gameplay.getOppBoard();
+    expect(opp).toStrictEqual(oppBoard);
   });
 
   it("Should have missed coordinates on opponent board", () => {
@@ -163,13 +162,92 @@ describe("Print Board", () => {
     gameplay.playRound([9, 9]);
     gameplay.playRound([9, 9]);
 
-    let players = gameplay.getPlayerBoards();
+    let opp = gameplay.getOppBoard();
 
-    let [playerBoard, opponentBoard] = players;
+    expect(opp).toStrictEqual(oppBoard);
+  });
 
-    console.log(opponentBoard);
-    console.log(oppBoard);
+  it("Should have missed coordinates on player board", () => {
+    gameplay.playRound([9, 9]);
+    gameplay.playRound([9, 9]);
 
-    expect(opponentBoard).toStrictEqual(oppBoard);
+    let currentPlayer = [
+      [
+        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        [],
+        [],
+        [],
+        [],
+        [],
+      ],
+      [[], [], [], [], [], [], [], [], [], []],
+      [
+        [],
+        [],
+        [],
+        [],
+        { name: "Patrol Boat", length: 2, timesHit: 0, sunk: false },
+        { name: "Patrol Boat", length: 2, timesHit: 0, sunk: false },
+        [],
+        [],
+        [],
+        [],
+      ],
+      [[], [], [], [], [], [], [], [], [], []],
+      [
+        [],
+        [],
+        [],
+        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
+        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
+        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
+        [],
+        [],
+        [],
+        [],
+      ],
+      [
+        [],
+        [],
+        [],
+        [],
+        [],
+        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
+        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
+        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
+        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
+        [],
+      ],
+      [[], [], [], [], [], [], [], [], [], []],
+      [[], [], [], [], [], [], [], [], [], []],
+      [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
+        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
+        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
+      ],
+      [[], [], [], [], [], [], [], [], [], ["x"]],
+    ];
+
+    let activePlayerBoard = gameplay.getActivePlayer().game.getBoard();
+
+    expect(activePlayerBoard).toEqual(currentPlayer);
+  });
+
+  it("Should find out which is player 1, and which is player 2", () => {
+    let [player1, player2] = gameplay.getPlayers();
+
+    expect(player1).toBe("User");
+    expect(player2).toBe("Computer");
   });
 });

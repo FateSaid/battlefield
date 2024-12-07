@@ -50,8 +50,8 @@ body {
   height: 600px;
 }
 
-#oneBoard,
-#twoBoard {
+#first-player-board,
+#second-player-board {
   display: flex;
   flex-direction: column-reverse;
 }

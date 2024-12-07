@@ -9,16 +9,22 @@ export function GameController(player1, player2) {
 
   const getActivePlayer = () => activePlayer;
 
-  function getPlayerBoards() {
-    if (getActivePlayer() === players[0]) {
-      return [players[0].game.getBoard(), printOppBoard(players[1])];
-    } else {
-      return [players[1].game.getBoard(), printOppBoard(players[0])];
-    }
+  function getPlayers() {
+    return [players[0].name, players[1].name];
   }
 
   function switchPlayer() {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  }
+
+  function getOppBoard() {
+    if (getActivePlayer() === players[0]) {
+      return printOppBoard(players[1]);
+    } else if (getActivePlayer() === players[1]) {
+      return printOppBoard(players[0]);
+    } else {
+      throw new Error("getOppBoard not working");
+    }
   }
 
   SetupShip(players[0], players[1]);
@@ -43,7 +49,8 @@ export function GameController(player1, player2) {
   return {
     getActivePlayer,
     playRound,
-    getPlayerBoards,
+    getPlayers,
+    getOppBoard,
   };
 }
 

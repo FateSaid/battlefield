@@ -9,7 +9,7 @@ export function attack(addShipSunk, board, missedAttacks, coordinate) {
     return "Hit";
   } else {
     missedAttacks.push([x, y]);
-    board[x][y] = null;
+    board[x][y] = ["x"];
     return false;
   }
 }
