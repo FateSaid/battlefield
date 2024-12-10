@@ -147,7 +147,7 @@ describe("Print Board", () => {
 
   it("Should have missed coordinates on opponent board", () => {
     let oppBoard = [
-      [[], [], [], [], [], [], [], [], [], ["x"]],
+      [[], [], [], [], [], [], [], [], ["x"], []],
       [[], [], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], [], []],
       [[], [], [], [], [], [], [], [], [], []],
@@ -159,10 +159,11 @@ describe("Print Board", () => {
       [[], [], [], [], [], [], [], [], [], []],
     ];
 
-    gameplay.playRound([9, 9]);
+    gameplay.playRound([9, 8]);
     gameplay.playRound([9, 9]);
 
     let opp = gameplay.getOppBoard();
+    console.log(opp, oppBoard);
 
     expect(opp).toStrictEqual(oppBoard);
   });
@@ -247,7 +248,7 @@ describe("Print Board", () => {
   it("Should find out which is player 1, and which is player 2", () => {
     let [player1, player2] = gameplay.getPlayers();
 
-    expect(player1).toBe("User");
-    expect(player2).toBe("Computer");
+    expect(player1.name).toBe("User");
+    expect(player2.name).toBe("Computer");
   });
 });

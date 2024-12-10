@@ -70,6 +70,10 @@ body {
   background-color: darkblue;
 }
 
+.missed-attack {
+  background-color: red;
+}
+
 .result {
   border: 1px solid #000;
   display: flex;

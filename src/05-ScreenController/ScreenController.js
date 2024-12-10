@@ -9,52 +9,65 @@ import {
 export function ScreenController() {
   const gameplay = GameController("User", "Computer");
 
-  const [player1, player2] = gameplay.getPlayers();
-
-  const playerTurn = (player) => resultOutput(player);
-
-  const updateScreen = () => {
-    clearPlayerBoards();
-
-    console.log(player1, player2);
-
-    playerTurn(`${gameplay.getActivePlayer().name}'s turn`);
-
-    checkPlayer(gameplay.getActivePlayer(), player1, player2, gameplay);
-  };
-
-  updateScreen();
+  updateScreen(gameplay);
 }
 
 function checkPlayer(activePlayer, player1, player2, gameplay) {
-  const opponentBoard = gameplay.getOppBoard();
-  if (activePlayer.name === player1) {
-    createDivCell(activePlayer, activePlayer.game.getBoard(), playerOneBoard);
-    createDivCell(player2, opponentBoard, playerTwoBoard);
-  } else if (activePlayer.name === player2) {
-    createDivCell(activePlayer, activePlayer.game.getBoard(), playerTwoBoard);
-    createDivCell(player1, opponentBoard, playerOneBoard);
+  let opponentBoard = gameplay.getOppBoard();
+  if (activePlayer.name === player1.name) {
+    createDivCell(gameplay, activePlayer.game.getBoard(), playerOneBoard);
+    createDivCell(gameplay, opponentBoard.reverse(), playerTwoBoard);
+  } else if (activePlayer.name === player2.name) {
+    createDivCell(gameplay, activePlayer.game.getBoard(), playerTwoBoard);
+    createDivCell(gameplay, opponentBoard.reverse(), playerOneBoard);
   } else {
     throw new Error("Check Player not matching player name");
   }
 }
 
-function createDivCell(player, board, boardDom) {
+function createDivCell(gameplay, board, boardDom) {
   for (let i = 0; i < board.length; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
     for (let j = 0; j < board.length; j++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-      eventHandler(player, cell, i, j);
+      if (!Array.isArray(board[i][j])) {
+        cell.classList.add("ship");
+      }
+      if (board[i][j][0] === "x") {
+        cell.classList.add("missed-attack");
+      }
+      eventHandler(gameplay, cell, i, j);
       row.appendChild(cell);
     }
     boardDom(row);
   }
 }
 
-function eventHandler(player, cell, x, y) {
+function eventHandler(gameplay, cell, x, y) {
   cell.addEventListener("click", () => {
-    player.game.playRound(x, y);
+    gameplay.playRound([x, y]);
+
+    updateScreen(gameplay);
+  });
+}
+
+function updateScreen(gameplay) {
+  clearBoard();
+
+  const [player1, player2] = gameplay.getPlayers();
+
+  const playerTurn = (player) => resultOutput(player);
+
+  playerTurn(`${gameplay.getActivePlayer().name}'s turn`);
+
+  checkPlayer(gameplay.getActivePlayer(), player1, player2, gameplay);
+}
+
+function clearBoard() {
+  const playerBoards = document.querySelectorAll(".player-board");
+  playerBoards.forEach((board) => {
+    board.textContent = "";
   });
 }
