@@ -32,7 +32,8 @@ export function GameController(player1, player2) {
   function playRound(coordinate) {
     let [x, y] = coordinate;
     let opponent = activePlayer === players[1] ? players[0] : players[1];
-    opponent.game.receiveAttack([x, y]);
+
+    let binary = opponent.game.receiveAttack([x, y]);
 
     //calculate Winner
     if (calculateWinner(opponent)) {
@@ -40,6 +41,8 @@ export function GameController(player1, player2) {
     }
 
     switchPlayer();
+
+    return binary;
   }
 
   function calculateWinner(player) {

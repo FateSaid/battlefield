@@ -13,9 +13,9 @@ export function addShip(board, ship, x, y) {
         throw new Error("It already contains ship object");
       }
       if (pos === "horizontal") {
-        board[same][i] = ship;
+        board[same][i] = [ship, 0];
       } else if (pos === "vertical") {
-        board[i][same] = ship;
+        board[i][same] = [ship, 0];
       }
     }
   }

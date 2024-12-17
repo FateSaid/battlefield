@@ -24,6 +24,7 @@ function Gameboard() {
   }
 
   function receiveAttack(coordinate) {
+    console.log(coordinate);
     return attack(addShipSunk, board, missedAttacks, coordinate);
   }
 

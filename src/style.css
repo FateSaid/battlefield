@@ -74,6 +74,10 @@ body {
   background-color: red;
 }
 
+.hitting-cell {
+  background-color: black;
+}
+
 .result {
   border: 1px solid #000;
   display: flex;

@@ -163,7 +163,6 @@ describe("Print Board", () => {
     gameplay.playRound([9, 9]);
 
     let opp = gameplay.getOppBoard();
-    console.log(opp, oppBoard);
 
     expect(opp).toStrictEqual(oppBoard);
   });

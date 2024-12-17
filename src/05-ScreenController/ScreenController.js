@@ -3,7 +3,6 @@ import {
   playerOneBoard,
   playerTwoBoard,
   resultOutput,
-  clearPlayerBoards,
 } from "../04-gameplay/dom.js";
 
 export function ScreenController() {
@@ -32,8 +31,12 @@ function createDivCell(gameplay, board, boardDom) {
     for (let j = 0; j < board.length; j++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-      if (!Array.isArray(board[i][j])) {
+      if (board[i][j].length === 2) {
         cell.classList.add("ship");
+      }
+
+      if (board[i][j][1] === "hit") {
+        cell.classList.add("hitting-cell");
       }
       if (board[i][j][0] === "x") {
         cell.classList.add("missed-attack");
@@ -48,7 +51,6 @@ function createDivCell(gameplay, board, boardDom) {
 function eventHandler(gameplay, cell, x, y) {
   cell.addEventListener("click", () => {
     gameplay.playRound([x, y]);
-
     updateScreen(gameplay);
   });
 }
@@ -70,4 +72,9 @@ function clearBoard() {
   playerBoards.forEach((board) => {
     board.textContent = "";
   });
+}
+
+function checkHit(binary) {
+  if (binary === "Hit") {
+  }
 }
