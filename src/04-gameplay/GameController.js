@@ -59,10 +59,17 @@ export function GameController(player1, player2) {
 
 function printOppBoard(player) {
   let board = createBoard();
+  let hitArray = player.game.hitAttacks;
   let missedArray = player.game.missedAttacks;
-  for (let i = 0; i < missedArray.length; i++) {
-    let [x, y] = missedArray[i];
-    board[x][y] = ["x"];
-  }
+  loopArrayOpponent(missedArray, board, "x");
+
+  loopArrayOpponent(hitArray, board, "hit");
   return board.reverse();
+}
+
+function loopArrayOpponent(array, board, mark) {
+  for (let i = 0; i < array.length; i++) {
+    let [x, y] = array[i];
+    board[x][y] = [`${mark}`];
+  }
 }

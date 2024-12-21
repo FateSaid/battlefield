@@ -14,7 +14,9 @@ describe("Checking GameController players", () => {
 
   test("Player 1 should attempt to hit player2 board", () => {
     gameplay.playRound([0, 0]);
-    expect(gameplay.getActivePlayer().game.getBoard()[0][0].timesHit).toBe(1);
+    expect(gameplay.getActivePlayer().game.getBoard()[0][0][0].timesHit).toBe(
+      1
+    );
   });
 
   test("Player 1 should store player 2 missed hit", () => {
@@ -86,13 +88,13 @@ describe("Print Board", () => {
   let playerOneShipLocation = [
     [0, 0],
     [0, 4],
-    [(5, 5)],
+    [5, 5],
     [5, 8],
-    [(4, 3)],
+    [4, 3],
     [4, 5],
-    [(8, 7)],
+    [8, 7],
     [8, 9],
-    [(2, 4)],
+    [2, 4],
     [2, 5],
   ];
 
@@ -111,7 +113,7 @@ describe("Print Board", () => {
   function checkBoard(board, playerLocation) {
     for (let i = 0; i < playerLocation.length; i++) {
       let [x, y] = playerLocation[i];
-      if (Array.isArray(board[x][y])) {
+      if (board[x][y].length !== 2) {
         return false;
       }
     }
@@ -173,11 +175,11 @@ describe("Print Board", () => {
 
     let currentPlayer = [
       [
-        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
-        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
-        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
-        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
-        { name: "Carrier", length: 5, timesHit: 0, sunk: false },
+        [{ name: "Carrier", length: 5, timesHit: 0, sunk: false }, 0],
+        [{ name: "Carrier", length: 5, timesHit: 0, sunk: false }, 0],
+        [{ name: "Carrier", length: 5, timesHit: 0, sunk: false }, 0],
+        [{ name: "Carrier", length: 5, timesHit: 0, sunk: false }, 0],
+        [{ name: "Carrier", length: 5, timesHit: 0, sunk: false }, 0],
         [],
         [],
         [],
@@ -190,8 +192,8 @@ describe("Print Board", () => {
         [],
         [],
         [],
-        { name: "Patrol Boat", length: 2, timesHit: 0, sunk: false },
-        { name: "Patrol Boat", length: 2, timesHit: 0, sunk: false },
+        [{ name: "Patrol Boat", length: 2, timesHit: 0, sunk: false }, 0],
+        [{ name: "Patrol Boat", length: 2, timesHit: 0, sunk: false }, 0],
         [],
         [],
         [],
@@ -202,9 +204,9 @@ describe("Print Board", () => {
         [],
         [],
         [],
-        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
-        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
-        { name: "Destroyer", length: 3, timesHit: 0, sunk: false },
+        [{ name: "Destroyer", length: 3, timesHit: 0, sunk: false }, 0],
+        [{ name: "Destroyer", length: 3, timesHit: 0, sunk: false }, 0],
+        [{ name: "Destroyer", length: 3, timesHit: 0, sunk: false }, 0],
         [],
         [],
         [],
@@ -216,10 +218,10 @@ describe("Print Board", () => {
         [],
         [],
         [],
-        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
-        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
-        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
-        { name: "Battleship", length: 4, timesHit: 0, sunk: false },
+        [{ name: "Battleship", length: 4, timesHit: 0, sunk: false }, 0],
+        [{ name: "Battleship", length: 4, timesHit: 0, sunk: false }, 0],
+        [{ name: "Battleship", length: 4, timesHit: 0, sunk: false }, 0],
+        [{ name: "Battleship", length: 4, timesHit: 0, sunk: false }, 0],
         [],
       ],
       [[], [], [], [], [], [], [], [], [], []],
@@ -232,14 +234,15 @@ describe("Print Board", () => {
         [],
         [],
         [],
-        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
-        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
-        { name: "Submarine", length: 3, timesHit: 0, sunk: false },
+        [{ name: "Submarine", length: 3, timesHit: 0, sunk: false }, 0],
+        [{ name: "Submarine", length: 3, timesHit: 0, sunk: false }, 0],
+        [{ name: "Submarine", length: 3, timesHit: 0, sunk: false }, 0],
       ],
-      [[], [], [], [], [], [], [], [], [], ["x"]],
+      [[], [], [], [], [], [], [], [], [], "x"],
     ];
 
     let activePlayerBoard = gameplay.getActivePlayer().game.getBoard();
+    console.log(activePlayerBoard);
 
     expect(activePlayerBoard).toEqual(currentPlayer);
   });
@@ -250,4 +253,36 @@ describe("Print Board", () => {
     expect(player1.name).toBe("User");
     expect(player2.name).toBe("Computer");
   });
+});
+
+/* player 1 
+    [0, 0], [0, 4]
+    [5, 5], [5, 8]
+    [4, 3], [4, 5]
+    [8, 7], [8, 9]
+    [2, 4], [2, 5]
+
+    */
+
+describe("Should show damage ship on opponent board", () => {
+  let gameplay = GameController("User", "Computer");
+
+  let oppBoard = [
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [[], [], [], [], [], [], [], [], [], []],
+    [["hit"], [], [], [], [], [], [], [], [], []],
+  ];
+
+  gameplay.playRound([0, 0]);
+  gameplay.playRound([0, 0]);
+  gameplay.playRound([0, 0]);
+
+  expect(gameplay.getOppBoard()).toStrictEqual(oppBoard);
 });

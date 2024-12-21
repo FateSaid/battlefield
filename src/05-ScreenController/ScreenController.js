@@ -35,7 +35,7 @@ function createDivCell(gameplay, board, boardDom) {
         cell.classList.add("ship");
       }
 
-      if (board[i][j][1] === "hit") {
+      if (board[i][j][1] === "hit" || board[i][j][0] === "hit") {
         cell.classList.add("hitting-cell");
       }
       if (board[i][j][0] === "x") {

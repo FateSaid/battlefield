@@ -50,6 +50,15 @@ describe("check whether attack is a hit or a miss", () => {
     expect(game.missedAttacks).toContainEqual([5, 5]);
   });
 
+  it("Keeping track of hit attacks", () => {
+    game.receiveAttack([0, 0]);
+
+    expect(game.hitAttacks).toStrictEqual([
+      [0, 1],
+      [0, 0],
+    ]);
+  });
+
   it("Ship is sunk", () => {
     game.placeShip("Submarine", 3, [7, 4], [7, 6]);
     game.receiveAttack([7, 4]);
